@@ -10,9 +10,8 @@ using namespace std;
 class GetString
 {
 public:
-
-    string GetBalanceString(int len ,
-                            int t );
+    string GetBalanceString(int len,
+                            int t);
 
     Tp void print();
     void print(string s);
@@ -45,7 +44,6 @@ private:
 // Tp void StandardPrint(vector<T>);
 
 double Variance(vector<int> &data);
-
 
 Tp vector<T> Input(int length)
 {

@@ -1,6 +1,6 @@
 #include "random.h"
-const int tiny_data = 100;
-const int huge_data = 50;
+const int tiny_data = 50;
+const int huge_data = 20;
 int n;
 
 int main()
@@ -23,7 +23,7 @@ int main()
       StringOutPut(gs.GetBalanceString(len, 30));
    }
 
-   tmp = gn.GetNumberList(huge_data, 2000, 200000);
+   tmp = gn.GetNumberList(huge_data, 2000, 5000);
    for (int i = 0;i<huge_data;i++)
    {
       int len = tmp[i];

@@ -8,3 +8,4 @@ main.exe
 .vscode/settings.json
 .vscode/targets.log
 .vscode/tasks.json
+main.cpp

@@ -1,9 +1,7 @@
 #include "random.h"
 
-
-
-string GetString::GetBalanceString(int len =40,
-                                   int t =30)
+string GetString::GetBalanceString(int len = 40,
+                                   int t = 30)
 {
     int n = use.size();
     random_device rd;
@@ -46,9 +44,9 @@ void GetString::print(string s)
 void GetString::receive(vector<char> t)
 {
     //    len = n;
-//    use.resize(n);
+    //    use.resize(n);
     GetString::use.clear();
-    for(auto &k:t)
+    for (auto &k : t)
     {
         GetString::use.push_back(k);
     }
@@ -130,7 +128,7 @@ double Variance(vector<int> &data)
     return variance / data.size();
 }
 
-Tp void StandardPrint(vector<T>& data)
+Tp void StandardPrint(vector<T> &data)
 {
     //标准LC Json输入
     cout << "[" << endl;
@@ -141,10 +139,7 @@ Tp void StandardPrint(vector<T>& data)
     cout << "]";
 }
 
-
-
-
 void StringOutPut(string s)
 {
-    cout<<"\""<<s<<"\""<<endl;
+    cout << "\"" << s << "\"" << endl;
 }
