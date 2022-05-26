@@ -95,7 +95,7 @@ Tp bool GetNumber::check(vector<T> &ans)
     }
     return Variance(test) <= limit;
 }
-int GetNumber::GetSingleNumber(int l = -1, int r = -1)
+int GetNumber::GetSingleNumber(int l , int r )
 {
     if (l == -1)
     {
@@ -128,16 +128,16 @@ double Variance(vector<int> &data)
     return variance / data.size();
 }
 
-Tp void StandardPrint(vector<T> &data)
-{
-    //标准LC Json输入
-    cout << "[" << endl;
-    for (auto &d : data)
-    {
-        cout << d << ",";
-    }
-    cout << "]";
-}
+// Tp void StandardPrint(vector<T> &data)
+// {
+//     //标准LC Json输入
+//     cout << "[" << endl;
+//     for (auto &d : data)
+//     {
+//         cout << d << ",";
+//     }
+//     cout << "]";
+// }
 
 void StringOutPut(string s)
 {

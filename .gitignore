@@ -9,3 +9,7 @@ main.exe
 .vscode/targets.log
 .vscode/tasks.json
 main.cpp
+data2.txt
+main.cpp
+main.cpp
+Signal.cpp

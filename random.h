@@ -28,7 +28,7 @@ class GetNumber
 public:
     vector<int> GetNumberList(int, int, int);
     Tp bool check(vector<T> &ans);
-    int GetSingleNumber(int l, int r);
+    int GetSingleNumber(int l = -1, int r = -1);
     GetNumber(int a, int b)
     {
         rangehigh = b;
@@ -57,6 +57,17 @@ Tp vector<T> Input(int length)
     return ans;
 }
 
-Tp void StandardPrint(T);
+Tp void StandardPrint(vector<T> &data)
+{
+    //标准LC Json输入
+    cout << "[" ;
+    for (int i=0;i<data.size();i++)
+    {
+        auto d = data[i];
+        if(i!=data.size() - 1 ) cout << d << ",";
+        else cout<<d;
+    }
+    cout << "]"<<endl;
+}
 
 void StringOutPut(string s);
