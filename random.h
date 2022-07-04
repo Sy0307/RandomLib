@@ -26,9 +26,10 @@ private:
 class GetNumber
 {
 public:
-    vector<int> GetNumberList(int, int, int);
+    vector<int> GetNumberList(int, int, int,int);
     Tp bool check(vector<T> &ans);
     int GetSingleNumber(int l = -1, int r = -1);
+    vector<int> GetUniqueNumberList(int len,int l,int r,int&seed);
     GetNumber(int a, int b)
     {
         rangehigh = b;

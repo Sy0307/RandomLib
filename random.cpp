@@ -5,7 +5,7 @@ string GetString::GetBalanceString(int len = 40,
 {
     int n = use.size();
     random_device rd;
-    default_random_engine en{rd()};
+    default_random_engine en((time(0)));
     uniform_int_distribution<int> dis(0, n - 1);
     string ans = "";
     for (int i = 0; i < len; i++)
@@ -52,7 +52,7 @@ void GetString::receive(vector<char> t)
     }
 }
 
-vector<int> GetNumber::GetNumberList(int len = -1, int l = -1, int r = -1)
+vector<int> GetNumber::GetNumberList(int len = -1, int l = -1, int r = -1,int seed = 0)
 {
     if (len == -1)
         len = GetNumber::len;
@@ -67,7 +67,7 @@ vector<int> GetNumber::GetNumberList(int len = -1, int l = -1, int r = -1)
     }
 
     random_device rd;
-    default_random_engine en{rd()};
+    default_random_engine en{rd()+seed};
     uniform_int_distribution<int> dis(l + 1, r - 1);
     for (int i = 0; i < len; i++)
     {
@@ -95,7 +95,7 @@ Tp bool GetNumber::check(vector<T> &ans)
     }
     return Variance(test) <= limit;
 }
-int GetNumber::GetSingleNumber(int l , int r )
+int GetNumber::GetSingleNumber(int l, int r)
 {
     if (l == -1)
     {
@@ -142,4 +142,32 @@ double Variance(vector<int> &data)
 void StringOutPut(string s)
 {
     cout << "\"" << s << "\"" << endl;
+}
+
+vector<int> GetNumber::GetUniqueNumberList(int len, int l, int r,int& seed)
+{
+
+    vector<int> temp;
+    map<int,int> mp;
+    mp.clear();
+    srand(seed);
+    for (int i = 0; i < len; ++i)
+    {
+        srand(seed);
+        int t = GetSingleNumber(l, r)+rand();
+        while (mp[t] != 0||t<l||t>r)
+        {
+            srand(++seed);
+            t = GetSingleNumber(l, r)+rand();
+        }
+        mp[t]++;
+        temp.push_back(t);
+    }
+    random_shuffle(temp.begin(), temp.end());
+    vector<int> ans(len);
+    for (int i = 0; i < len; i++)
+    {
+        ans[i] = temp[i];
+    }
+    return ans;
 }
