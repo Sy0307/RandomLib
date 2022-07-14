@@ -1,128 +1,78 @@
 #include "random.h"
+#include <windows.h>
 const int tiny_data = 40;
 const int huge_data = 10;
 using namespace std;
 
-map<int, int> recordK;
-class Solution
+int seed = time(NULL);
+void tiny_make(int n, int l)
 {
-public:
-   int ShinyGem(int k, vector<int> &s)
-   {
-      int n = s.size();
-      map<int, int> mp;
-      for (int i = 0; i < n; i++)
-      {
-         mp[s[i]]++;
-      }
-      int tmp = k, mex;
-      for (int i = 0;; i++)
-      {
-         if (!mp.count(i))
-         {
-            if (tmp)
-            {
-               tmp--;
-            }
-            else
-            {
-               mex = i;
-               break;
-            }
-         }
-      }
-      set<pair<int, int>> sp;
-      for (auto &[x, y] : mp)
-      {
-         if (x > mex)
-         {
-            sp.insert({y, x});
-         }
-      }
+   GetNumber gk(0, n - 1);
+   auto k = gk.GetSingleNumber(0, n - 1);
+   cout << l << endl;
+   cout << k << endl;
 
-      while (sp.size() && k >= sp.begin()->first)
-      {
-         k -= sp.begin()->first;
-         sp.erase(sp.begin());
-      }
-      return -sp.size();
-   }
-};
+   GetNumber gpos(1, l - 1);
 
-void tiny_make()
-{
-   GetNumber Gn(20, 2 * 100000 - 1);
-   auto n = Gn.GetSingleNumber();
-   GetNumber gk(10, n);
-   auto k = gk.GetSingleNumber(1, 100);
-   // cout << k << endl;
-   int size = gk.GetSingleNumber(10, 20);
-   vector<int> tot(0);
-   while (size--)
-   {
-      int tmp = gk.GetSingleNumber(20, 50);
-      auto kk = Gn.GetNumberList(tmp, 0, 200);
-      tot.insert(tot.end(), kk.begin(), kk.end());
-   }
-   Solution s;
-   if (s.ShinyGem(k, tot) == 0 || recordK[k])
-   {
-      tiny_make();
-      return;
-   }
-   else
-   {
-      recordK[k]++;
-      cout << k << endl;
-      StandardPrint(tot);
-   }
+   auto pos = gpos.GetUniqueNumberList(n - 1, 1, l - 1,seed+=10);
+   pos.push_back(0);
+   sort(pos.begin(), pos.end());
+   StandardPrint(pos);
+   int size = pos.size();
+
+   GetNumber gtime(1, 10000);
+   auto time = gtime.GetNumberList(size, 1, 100,seed+=10);
+   //  cout<<size<<" "<<time.size()<<endl;
+   StandardPrint(time);
 }
-
-void huge_make()
+void huge_make(int n, int l)
 {
-   GetNumber Gn(20, 2 * 100000 - 1);
-   auto n = Gn.GetSingleNumber();
-   GetNumber gk(10, n);
-   auto k = gk.GetSingleNumber(20, 1000);
-   //  cout << k << endl;
-   int size = gk.GetSingleNumber(20, 100);
-   vector<int> tot(0);
-   while (size--)
-   {
-      int tmp = gk.GetSingleNumber(100, 200);
-      auto kk = Gn.GetNumberList(tmp, 0, 1000);
-      tot.insert(tot.end(), kk.begin(), kk.end());
-   }
- //  StandardPrint(tot);
-   Solution s;
-   if (s.ShinyGem(k, tot) == 0 || recordK[k])
-   {
-      huge_make();
-      return;
-   }
-   else
-   {
-      recordK[k]++;
-      cout << k << endl;
-      StandardPrint(tot);
-   }
-}
+   GetNumber gk(0, n - 1);
+   auto k = gk.GetSingleNumber(0, n - 1);
+   cout << l << endl;
+   cout << k << endl;
 
+   GetNumber gpos(1, l - 1);
+   auto pos = gpos.GetUniqueNumberList(n - 1, 1, l - 1,seed+=10);
+   pos.push_back(0);
+   sort(pos.begin(), pos.end());
+   StandardPrint(pos);
+   int size = pos.size();
+
+   GetNumber gtime(1, 10000);
+   auto time = gtime.GetNumberList(size, 1, 200,seed+=10);
+   //  cout<<size<<" "<<time.size()<<endl;
+   StandardPrint(time);
+}
 int main()
 {
-   freopen("data2.txt", "w", stdout);
+   freopen("data.txt", "w", stdout);
    //    cout<<1<<endl;
-   GetNumber Gn(20, 2 * 100000 - 1);
-   auto n = Gn.GetSingleNumber();
-   GetNumber gk(10, n);
-
+   GetNumber ginc(10, 30);
+   GetNumber gn(100, 10000);
+   //  auto n = gn.GetSingleNumber();
    for (int i = 0; i < tiny_data; i++)
    {
-      tiny_make();
+      srand(seed);
+      seed += 10;
+      auto n = rand() % 200 + 10;
+      auto l = rand() % 500 + 10;
+      while(n>l)
+      {
+         n = rand() % 200 + 10;
+         l = rand() % 500 + 10;
+         seed+=10;
+      }
+      tiny_make(n, l);
+      //   cout<<"Rank = "<<i<<endl;
+      //   tiny_make(gn.GetSingleNumber(10,max(n,500)));
    }
-   recordK.clear();
    for (int i = 0; i < huge_data; i++)
    {
-      huge_make();
+      srand(seed);
+      seed += 10;
+      auto n = rand() % 300 + 100;
+      auto l = rand() % 9500 + 500;
+      huge_make(n, l);
    }
 }
