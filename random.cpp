@@ -52,7 +52,7 @@ void GetString::receive(vector<char> t)
     }
 }
 
-vector<int> GetNumber::GetNumberList(int len = -1, int l = -1, int r = -1,int seed = 0)
+vector<int> GetNumber::GetNumberList(int len, int l, int r, int &seed)
 {
     if (len == -1)
         len = GetNumber::len;
@@ -67,7 +67,7 @@ vector<int> GetNumber::GetNumberList(int len = -1, int l = -1, int r = -1,int se
     }
 
     random_device rd;
-    default_random_engine en{rd()+seed};
+    default_random_engine en{seed};
     uniform_int_distribution<int> dis(l + 1, r - 1);
     for (int i = 0; i < len; i++)
     {
@@ -75,12 +75,12 @@ vector<int> GetNumber::GetNumberList(int len = -1, int l = -1, int r = -1,int se
     }
 
     if (!check(ans))
-        return GetNumberList(len, l, r);
+        return GetNumberList(len, l, r,seed);
     return ans;
 }
 Tp bool GetNumber::check(vector<T> &ans)
 {
-    int limit = pow((rangehigh - rangelow), 1.5);
+    int limit = pow((rangehigh - rangelow), 3);
     int n = ans.size();
     map<int, int> vis;
     for (auto &now : ans)
@@ -95,7 +95,7 @@ Tp bool GetNumber::check(vector<T> &ans)
     }
     return Variance(test) <= limit;
 }
-int GetNumber::GetSingleNumber(int l, int r)
+int GetNumber::GetSingleNumber(int l, int r,int len)
 {
     if (l == -1)
     {

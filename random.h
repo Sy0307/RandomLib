@@ -26,17 +26,16 @@ private:
 class GetNumber
 {
 public:
-    vector<int> GetNumberList(int, int, int,int);
+    vector<int> GetNumberList(int len, int l, int r, int &seed);
     Tp bool check(vector<T> &ans);
-    int GetSingleNumber(int l = -1, int r = -1);
-    vector<int> GetUniqueNumberList(int len,int l,int r,int&seed);
-    GetNumber(int a, int b)
+    int GetSingleNumber(int l = -1, int r = -1,int len = 0);
+    vector<int> GetUniqueNumberList(int len, int l, int r, int &seed);
+    GetNumber(int a, int b,int c = 0)
     {
         rangehigh = b;
         rangelow = a;
+        len = c;
     }
-
-private:
     int rangelow;
     int rangehigh;
     int len;
@@ -61,14 +60,16 @@ Tp vector<T> Input(int length)
 Tp void StandardPrint(vector<T> &data)
 {
     //标准LC Json输入
-    cout << "[" ;
-    for (int i=0;i<data.size();i++)
+    cout << "[";
+    for (int i = 0; i < data.size(); i++)
     {
         auto d = data[i];
-        if(i!=data.size() - 1 ) cout << d << ",";
-        else cout<<d;
+        if (i != data.size() - 1)
+            cout << d << ",";
+        else
+            cout << d;
     }
-    cout << "]"<<endl;
+    cout << "]" << endl;
 }
 
 void StringOutPut(string s);
