@@ -1,1 +1,2 @@
-g++ random.h random.cpp main.cpp -o main.exe & main
+g++ random.h random.cpp main.cpp -o main.exe
+g++ Clear.cpp -o Clear.exe

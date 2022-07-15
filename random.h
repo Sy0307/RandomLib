@@ -41,6 +41,16 @@ public:
     int len;
 };
 
+class System_Control
+{
+public:
+    int GetCount();
+    void AddCount();
+};
+
+
+
+//extra content
 // Tp void StandardPrint(vector<T>);
 
 double Variance(vector<int> &data);
@@ -73,3 +83,4 @@ Tp void StandardPrint(vector<T> &data)
 }
 
 void StringOutPut(string s);
+

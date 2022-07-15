@@ -16,3 +16,12 @@ Signal.cpp
 Gem.cpp
 main.cpp
 .gitignore
+random.exe
+*.exe
+count.txt
+Log.txt
+LongWay.cpp
+main.cpp
+DATA/count.txt
+DATA/Log.txt
+Example/LongWay.cpp

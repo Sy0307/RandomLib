@@ -46,7 +46,9 @@ void huge_make(int n, int l)
 }
 int main()
 {
-   freopen("data.txt", "w", stdout);
+   System_Control sc;
+ //  sc.clear();
+   sc.AddCount();
    //    cout<<1<<endl;
    GetNumber ginc(10, 30);
    GetNumber gn(100, 10000);

@@ -171,3 +171,27 @@ vector<int> GetNumber::GetUniqueNumberList(int len, int l, int r,int& seed)
     }
     return ans;
 }
+
+void System_Control::AddCount()
+{
+    freopen("DATA\\count.txt", "r", stdin);
+    int n;
+    cin >> n;
+    fclose(stdin);
+    freopen("DATA\\count.txt", "w", stdout);
+    cout << n + 1 << endl;
+    fclose(stdout);
+ //   cout<<1<<endl;
+    auto path = "Data\\Data"+to_string(n+1)+".txt";
+  //  cout<<1<<endl;
+    freopen(path.c_str(), "w", stdout);
+}
+
+int System_Control::GetCount()
+{
+    freopen("count", "r", stdin);
+    int n;
+    cin >> n;
+    fclose(stdin);
+    return n;
+}
