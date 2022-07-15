@@ -1,0 +1,1 @@
+[真随机数，伪随机数和加密随机数](https://betterprogramming.pub/generating-random-numbers-is-a-lot-harder-than-you-think-b121c3e75d08)
