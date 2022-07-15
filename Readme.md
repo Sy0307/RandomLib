@@ -31,12 +31,5 @@ StringOutPut #输出字符串 LC标准格式输出
 # 使用方法
 
 
-在终端下运行 ./Run.cmd
-或者
-``` 
-g++ random.h random.cpp main.cpp -o main.exe & main
-```
-即可
-(main.cpp 可以改自己改动)
-
-生成的文件需要自己指定，后续会跟进更新这部分的内容，目前的方法是在main.cpp里面用freopen的方法指定。
+点击 start.cmd 并且开始按照提示运行即可。
+数据均生成在DATA文件夹下。

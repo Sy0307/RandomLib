@@ -1,9 +1,8 @@
-call Run.cmd
+call init.cmd
 
 color 0E
 :loop
 @echo off
-setlocal EnableDelayedExpansion
 
 echo.
 echo "Let choose your action"
