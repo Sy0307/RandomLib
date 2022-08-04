@@ -13,6 +13,7 @@ echo "Let choose your action"
 echo "If you input 0, you can clear all the data."
 echo "If you input 1, you can choose the numbers of data files."
 echo "If you input 2, you can exit the program."
+echo "If you input 3, you can recompile all the files."
 set /p input=Input the order:
 if "%input%" == "0" (
     start /b Clear.exe
@@ -33,4 +34,9 @@ if "%input%" == "1" (
 if "%input%" == "2" (
     echo Exit the program.
     exit
+)
+if "%input%" == "3" (
+    call init.cmd
+    echo All the files have been recompiled.
+    goto loop
 )
