@@ -114,7 +114,7 @@ Tp vector<T> Input(int length)
     return ans;
 }
 
-Tp void StandardPrint(vector<T> &data , bool f = 1)
+Tp void StandardPrint(vector<T> &data, bool f = 1)
 {
     //标准LC Json输入
     cout << "[";
@@ -126,8 +126,8 @@ Tp void StandardPrint(vector<T> &data , bool f = 1)
         else
             cout << d;
     }
-    cout << "]" ;
-    if(f)
+    cout << "]";
+    if (f)
         cout << endl;
 }
 

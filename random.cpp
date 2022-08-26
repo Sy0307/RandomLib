@@ -199,3 +199,8 @@ int System_Control::GetCount()
     fclose(stdin);
     return n;
 }
+
+Tp void StandardPrint(T x)
+{
+    cout<<x<<endl;
+}
