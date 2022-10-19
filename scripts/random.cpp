@@ -54,7 +54,7 @@ using namespace std;
 // }
 
 // to fix bugs
-int GetNumber::GetSingleNumber(int l, int r, double per)
+long long GetNumber::GetSingleNumber(int l, int r, double per)
 {
     if (l == -1)
     {
@@ -76,7 +76,29 @@ int GetNumber::GetSingleNumber(int l, int r, double per)
     return -abs(ans);
     //   return sign==1?ans:abs(ans);
 }
-vector<int> GetNumber::GetNumberList(int len, int l, int r, double per) //per = 负数几率
+double GetNumber::GetSingleDouble(int l, int r, double per)
+{
+    if (l == -1)
+    {
+        l = rangelow;
+    }
+    if (r == -1)
+    {
+        r = rangehigh;
+    }
+    WinRandom rnd;
+    double ans = abs(rnd.randInt());
+    int bias = abs(rnd.randInt() % 8 + 4);
+    ans = ans / pow(10, bias);
+    int percent = rnd.randUnsigned() % (10000 - 1) + 1;
+    if (percent < per * 10000)
+    {
+        return abs(ans);
+    }
+    return -abs(ans);
+    //   return sign==1?ans:abs(ans);
+}
+Tp vector<T> GetNumber::GetNumberList(int len, int l, int r, double per) // per = 负数几率
 {
     if (len == -1)
         len = GetNumber::len;
@@ -135,34 +157,31 @@ double Variance(vector<int> &data)
     return variance / data.size();
 }
 
-// Tp void StandardPrint(vector<T> &data)
-// {
-//     //标准LC Json输入
-//     cout << "[" << endl;
-//     for (auto &d : data)
-//     {
-//         cout << d << ",";
-//     }
-//     cout << "]";
-// }
-
 void StringOutPut(string s)
 {
     cout << "\"" << s << "\"" << endl;
 }
 
-vector<int> GetNumber::GetUniqueNumberList(int len, int l, int r)
+Tp vector<T> GetNumber::GetUniqueNumberList(int len, int l, int r)
 {
-
+    if (l == -1)
+    {
+        l = rangelow;
+    }
+    if (r == -1)
+    {
+        r = rangehigh;
+    }
+    auto ty = typeid(int).name(); 
     vector<int> temp;
     map<int, int> mp;
     mp.clear();
     for (int i = 0; i < len; ++i)
     {
-        int t = GetSingleNumber(l, r) + rand();
+        int t = GetSingleNumber<ty>(l, r) + rand();
         while (mp[t] != 0 || t < l || t > r)
         {
-            t = GetSingleNumber(l, r) + rand();
+            t = GetSingleNumber<ty>(l, r) + rand();
         }
         mp[t]++;
         temp.push_back(t);
@@ -202,5 +221,56 @@ int System_Control::GetCount()
 
 Tp void StandardPrint(T x)
 {
-    cout<<x<<endl;
+    cout << x << endl;
+}
+
+Tp vector<T> Input(int length)
+{
+    vector<T> ans;
+    for (int i = 0; i < length; i++)
+    {
+        T x;
+        cin >> x;
+        ans.push_back(x);
+    }
+    return ans;
+}
+
+Tp void LCStandardPrint(vector<T> &data, bool space_allow)
+{
+    //标准LC Json输入
+    cout << "[";
+    for (int i = 0; i < data.size(); i++)
+    {
+        auto d = data[i];
+        if (i != data.size() - 1)
+            cout << d << ",";
+        else
+            cout << d;
+    }
+    cout << "]";
+    if (space_allow)
+        cout << endl;
+}
+
+Tp void StandardPrint(vector<T> &data, bool space_allow)
+{
+    //标准LC Json输入
+    for (int i = 0; i < data.size(); i++)
+    {
+        auto d = data[i];
+        if (i != data.size() - 1)
+            cout << d << " ";
+        else
+            cout << d;
+    }
+    if (space_allow)
+        cout << endl;
+}
+
+Tp void StandardPrint(T x, bool space_allow )
+{
+    cout << x;
+    if (space_allow)
+        cout << endl;
 }

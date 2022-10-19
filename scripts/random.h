@@ -75,16 +75,19 @@ private:
 class GetNumber
 {
 public:
-    vector<int> GetNumberList(int len, int l, int r, double per = 1);
+    Tp vector<T> GetNumberList(int len, int l, int r, double per = 1);
     Tp bool check(vector<T> &ans);
-    int GetSingleNumber(int l = -1, int r = -1, double sign = 1.0);
-    vector<int> GetUniqueNumberList(int len, int l, int r);
+    long long GetSingleNumber(int l = -1, int r = -1, double sign = 1.0);
+    double GetSingleDouble(int l = -1, int r = -1, double sign = 1.0);
+    Tp vector<T> GetUniqueNumberList(int len, int l = -1, int r = -1);
     GetNumber(int a, int b, int c = 0)
     {
         rangehigh = b;
         rangelow = a;
         len = c;
     }
+
+private:
     int rangelow;
     int rangehigh;
     int len;
@@ -93,6 +96,13 @@ public:
 class System_Control
 {
 public:
+    System_Control()
+    {
+        GetCount();
+        AddCount();
+    }
+
+private:
     int GetCount();
     void AddCount();
 };
@@ -102,33 +112,10 @@ public:
 
 double Variance(vector<int> &data);
 
-Tp vector<T> Input(int length)
-{
-    vector<T> ans;
-    for (int i = 0; i < length; i++)
-    {
-        T x;
-        cin >> x;
-        ans.push_back(x);
-    }
-    return ans;
-}
+Tp vector<T> Input(int length);
 
-Tp void StandardPrint(vector<T> &data, bool f = 1)
-{
-    //标准LC Json输入
-    cout << "[";
-    for (int i = 0; i < data.size(); i++)
-    {
-        auto d = data[i];
-        if (i != data.size() - 1)
-            cout << d << ",";
-        else
-            cout << d;
-    }
-    cout << "]";
-    if (f)
-        cout << endl;
-}
+Tp void LCStandardPrint(vector<T> &data, bool space_allow = 1);
 
-void StringOutPut(string s);
+Tp void StandardPrint(T, bool space_allow = 1);
+
+Tp void StandardPrint(vector<T> &data, bool space_allow = 1);

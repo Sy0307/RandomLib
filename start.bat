@@ -1,10 +1,10 @@
-call init.cmd
+call ./scripts/init.cmd
 
 @REM ::强制获取管理员运行权限
 @REM %1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd.exe","/c %~s0 ::","","runas",1)(window.close)&&exit
 
 setlocal EnableDelayedExpansion
-color 0E
+@REM color 0E
 :loop
 @echo off
 
@@ -16,8 +16,8 @@ echo "If you input 2, you can exit the program."
 echo "If you input 3, you can recompile all the files."
 set /p input=Input the order:
 if "%input%" == "0" (
-    start /b Clear.exe
-    echo Clear all the data.
+    start /b ./scripts/Clear.exe
+    echo Clear all the data. 
     goto loop
 )
 if "%input%" == "1" (
@@ -36,7 +36,7 @@ if "%input%" == "2" (
     exit
 )
 if "%input%" == "3" (
-    call init.cmd
+    call ./scripts/init.cmd
     echo All the files have been recompiled.
     goto loop
 )

@@ -4,32 +4,98 @@
 
 不管怎么说已经在更新了。会越来越好用的。
 
-目前的功能整理：
-## GetString 类型
+优点是保证了随机性。并且提供了一些基本的方法，帮助快速生成数据。
 
-string GetBalanceString(int len,int t) # len = 长度，t  = 方差，默认参数为30;
-void receive(vector<char>) # 指定字符串中可能出现的字符;
-print() 输出字符串;
+## 具体用法
 
-## GetNumber 类型
+你需要写一个main.cpp 文件，然后使用相关API来写你的数据生成文件。
+最终使用start.cmd来编译以及生成批量生成数据。
+
+## 功能整理
+
+### 必须添加的内容
+
+```cpp
+System_Control sc; // 系统控制，用于IO操作
+```
+
+### GetString 字符生成类
+
+```cpp
+string GetBalanceString(int len,int t)
+
+获取一个较为平衡的字符串
+len = 长度，t  = 方差，默认参数为30，正常情况下不需要调整;
+
+void receive(vector<char>) 
+
+指定字符串中可能出现的字符;
+在划定后，生成的字符串中只会出现这些字符
+
+```
+
+### GetNumber 数字生成类（包括int,double,float,long long）
+
 ### 成员
-int rangelow; 左边界
-int rangehigh; 右边界
-int len; 长度
+
+```cpp
+
+int rangelow; 生成数据的下界
+int rangehigh; 生成数据的上界
+int len; 生成数据的长度
+
+上述仅仅支持int类
+```
 
 ### 方法
-vector<int> GetNumber::GetNumberList(int len = -1, int l = -1, int r = -1,int seed = 0) #生成一个vector数组 参数为：长度，左边界，右边界，种子，默认参数为-1
 
-vector<int> GetUniqueNumberList(int len,int l,int r,int&seed); #生成一个不重复的数组，参数为：长度，左边界，右边界，种子，默认参数为-1
+```cpp
+GetNumberList(int len = -1, int l = -1, int r = -1)
 
+生成一个vector数组 参数为：长度，左边界，右边界，种子，默认参数为-1
 
-### 额外方法
-#### 输出系列
-Tp void StandardPrint(vector<T> &data) #输出任意类型的数组 LC标准格式输出
-StringOutPut #输出字符串 LC标准格式输出
+GetUniqueNumberList(int len,int l,int r,int&seed);
 
-# 使用方法
+生成一个不重复的数组，参数为：长度，左边界，右边界，种子，默认参数为-1
 
+GetNumber::GetNumber(int l = -1, int r = -1,int per)
 
-点击 start.cmd 并且开始按照提示运行即可。
-数据均生成在DATA文件夹下。
+生成一个数字（int或者double） 参数为：l=左边界,r = 右边界，per = 生成数字为正数的概率，默认参数为 1 ，即100%生成正数。
+```
+
+## 额外方法
+
+### 输出系列
+
+```cpp
+StandardPrint(T,bool space_allow=1);
+
+输出一个变量 T，space_allow 为是否允许输出空格，默认为1，即允许输出空格
+
+StandardPrint(vector<T> &data, bool space_allow = 1);
+
+输出一个数组，space_allow 为是否允许输出空格，默认为1，即允许输出空格
+
+Tp void LCStandardPrint(vector<T> &data, bool space_allow = 1);
+
+按输出任意类型的数组，参数为：是否允许空格，默认为1
+```
+
+## 使用方法
+
+点击 `start.cmd` 并且开始按照提示运行即可。
+数据均生成在`DATA`文件夹下。
+
+## main.cpp示例
+
+```cpp
+#include "Random.h"
+#include<math>
+
+using namespace std;
+
+int main()
+{
+    
+}
+```
