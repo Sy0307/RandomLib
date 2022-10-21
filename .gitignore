@@ -1,4 +1,4 @@
-data.txt
+*.txt
 main.cpp
 main.exe
 .vscode/c_cpp_properties.json

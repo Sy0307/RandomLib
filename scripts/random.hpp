@@ -13,6 +13,7 @@
 #include <algorithm>
 #define Tp template <typename T>
 using ll = long long;
+using namespace std;
 
 class WinRandom
 {
@@ -55,7 +56,7 @@ public:
     _(randSignedChar, signed char)
 };
 
-class GetString
+class GetString : public WinRandom
 {
 public:
     std::string Get_Balance_String(int len,
@@ -71,16 +72,15 @@ private:
     int len;
 };
 
-class GetNumber
+class GetNumber : public WinRandom
 {
 public:
     Tp std::vector<T> Get_Number_List(int len, int l, int r, double per = 1);
-    Tp bool check(std::vector<T> &ans);
-    long long GetSingleNumber(ll l = -1, ll r = -1, double sign = 1.0);
-    double GetSingleNumber(double l = -1, double r = -1, double sign = 1.0);
-    int GetSingleNumber(int l = -1, int r = -1, double sign = 1.0);
-    double GetSingleDouble(int l = -1, int r = -1, double sign = 1.0);
-    Tp std::vector<T> GetUniqueNumberList(int len, int l = -1, int r = -1);
+    long long Get_Single_Number(ll l = -1, ll r = -1, double per = 1.0);
+    double Get_Single_Number(double l = -1, double r = -1, double per = 1.0);
+    int Get_Single_Number(int l = -1, int r = -1, double per = 1.0);
+    // double Get_Single_Double(int l = -1, int r = -1, double per = 1.0);
+    Tp std::vector<T> Get_Unique_Number_List(int len, int l = -1, int r = -1);
     GetNumber(int _rangelow, int _rangehigh, int _len = 0)
     {
         rangehigh = _rangehigh;
@@ -92,9 +92,11 @@ public:
     }
 
 private:
+    Tp bool check(std::vector<T> &ans);
     int rangelow;
     int rangehigh;
     int len;
+    WinRandom rnd;
 };
 
 class System_Control
@@ -158,13 +160,13 @@ Tp void GetString::print()
 {
     for (auto i : use)
     {
-        cout << i << " ";
+        std::cout << i << " ";
     }
-    cout << endl;
+    std::cout << "\n";
 }
 void GetString::print(std::string s)
 {
-    cout << s << endl;
+    std::cout << s << "\n";
 }
 void GetString::receive(std::vector<char> t)
 {
@@ -178,8 +180,10 @@ void GetString::receive(std::vector<char> t)
 }
 
 // to fix bugs
-ll GetNumber::GetSingleNumber(ll l, ll r, double per)
+
+int GetNumber::Get_Single_Number(int l, int r, double per)
 {
+
     if (l == -1)
     {
         l = rangelow;
@@ -187,7 +191,7 @@ ll GetNumber::GetSingleNumber(ll l, ll r, double per)
     if (r == -1)
     {
         r = rangehigh;
-    }
+    };
     WinRandom rnd;
     ll ans = abs(rnd.randLong());
 
@@ -200,7 +204,29 @@ ll GetNumber::GetSingleNumber(ll l, ll r, double per)
     return -abs(ans);
     //   return sign==1?ans:abs(ans);
 }
-double GetNumber::GetSingleNumber(double l, double r, double per)
+long long GetNumber::Get_Single_Number(ll l, ll r, double per)
+{
+    if (l == -1)
+    {
+        l = rangelow;
+    }
+    if (r == -1)
+    {
+        r = rangehigh;
+    };
+    WinRandom rnd;
+    ll ans = abs(rnd.randLong());
+
+    ans = ans % (r - l + 1) + l;
+    int percent = rnd.randUnsigned() % (10000 - 1) + 1;
+    if (percent < per * 10000)
+    {
+        return abs(ans);
+    }
+    return -abs(ans);
+    //   return sign==1?ans:abs(ans);
+}
+double GetNumber::Get_Single_Number(double l, double r, double per)
 {
     if (l == -1)
     {
@@ -237,7 +263,7 @@ Tp std::vector<T> GetNumber::Get_Number_List(int len, int l, int r, double per) 
     }
     for (int i = 0; i < len; i++)
     {
-        ans[i] = GetSingleNumber(l, r, per);
+        ans[i] = Get_Single_Number(l, r, per);
         // fix bugs
         // ans[i] = 1;
     }
@@ -288,10 +314,10 @@ double Variance(std::vector<int> &data)
 
 // void std::stringOutPut(std::string s)
 // {
-//     cout << "\"" << s << "\"" << endl;
+//     std::cout << "\"" << s << "\"" << "\n";
 // }
 
-Tp std::vector<T> GetNumber::GetUniqueNumberList(int len, int l, int r)
+Tp std::vector<T> GetNumber::Get_Unique_Number_List(int len, int l, int r)
 {
     if (l == -1)
     {
@@ -308,10 +334,10 @@ Tp std::vector<T> GetNumber::GetUniqueNumberList(int len, int l, int r)
     { // is_same<T, int>::value ||
         for (int i = 0; i < len; ++i)
         {
-            int t = GetSingleNumber(l, r) + rand();
+            int t = Get_Single_Number(l, r) + rand();
             while (mp[t] != 0 || t < l || t > r)
             {
-                t = GetSingleNumber(l, r) + rand();
+                t = Get_Single_Number(l, r) + rand();
             }
             mp[t]++;
             temp.push_back(t);
@@ -333,11 +359,11 @@ void System_Control::AddCount()
     cin >> n;
     fclose(stdin);
     freopen("DATA\\count.txt", "w", stdout);
-    cout << n + 1 << endl;
+    std::cout << n + 1 << "\n";
     fclose(stdout);
-    //   cout<<1<<endl;
+    //   std::cout<<1<<"\n";
     auto path = "Data\\Data" + to_string(n + 1) + ".txt";
-    //  cout<<1<<endl;
+    //  std::cout<<1<<"\n";
     freopen(path.c_str(), "w", stdout);
 }
 
@@ -348,13 +374,6 @@ int System_Control::GetCount()
     cin >> n;
     fclose(stdin);
     return n;
-}
-
-Tp void StandardPrint(T x, bool space_allow)
-{
-    cout << x;
-    if (space_allow)
-        cout << "\n";
 }
 
 Tp std::vector<T> Input(int length)
@@ -372,38 +391,63 @@ Tp std::vector<T> Input(int length)
 Tp void LCStandardPrint(std::vector<T> &data, bool space_allow)
 {
     //标准LC Json输入
-    cout << "[";
+    std::cout << "[";
     for (int i = 0; i < data.size(); i++)
     {
         auto d = data[i];
         if (i != data.size() - 1)
-            cout << d << ",";
+            std::cout << d << ",";
         else
-            cout << d;
+            std::cout << d;
     }
-    cout << "]";
+    std::cout << "]";
     if (space_allow)
-        cout << endl;
+        std::cout << "\n";
 }
 
-Tp void StandardPrint(std::vector<T> &data, bool space_allow)
+void StandardPrint(std::vector<int> &data, bool space_allow)
 {
     //标准输出
     for (int i = 0; i < data.size(); i++)
     {
         auto d = data[i];
         if (i != data.size() - 1)
-            cout << d << " ";
+            std::cout << d << " ";
         else
-            cout << d;
+            std::cout << d;
     }
     if (space_allow)
-        cout << endl;
+        std::cout << "\n";
 }
 
-Tp void StandardPrint(T x, bool space_allow)
+void StandardPrint(std::vector<ll> &data, bool space_allow)
 {
-    cout << x;
+    //标准输出
+    for (int i = 0; i < data.size(); i++)
+    {
+        auto d = data[i];
+        if (i != data.size() - 1)
+            std::cout << d << " ";
+        else
+            std::cout << d;
+    }
     if (space_allow)
-        cout << endl;
+        std::cout << "\n";
 }
+
+void StandardPrint(std::vector<double> &data, bool space_allow)
+{
+    //标准输出
+    for (int i = 0; i < data.size(); i++)
+    {
+        auto d = data[i];
+        if (i != data.size() - 1)
+            std::cout << d << " ";
+        else
+            std::cout << d;
+    }
+    if (space_allow)
+        std::cout << "\n";
+}
+
+//
