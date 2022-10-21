@@ -1,6 +1,6 @@
 // Author =  Sy03
 //  C++ standard  = C++20
-//  Recommand compiler = g++
+//  Recommend compiler = g++
 
 #include <vector>
 #include <assert.h>
@@ -86,6 +86,9 @@ public:
         rangelow = a;
         len = c;
     }
+    GetNumber()
+    {
+    }
 
 private:
     int rangelow;
@@ -98,13 +101,13 @@ class System_Control
 public:
     System_Control()
     {
-        GetCount();
+        // GetCount();
         AddCount();
     }
-
-private:
     int GetCount();
     void AddCount();
+
+private:
 };
 
 // extra content
@@ -116,6 +119,8 @@ Tp vector<T> Input(int length);
 
 Tp void LCStandardPrint(vector<T> &data, bool space_allow = 1);
 
-Tp void StandardPrint(T, bool space_allow = 1);
+// Tp void StandardPrint(T, bool space_allow = 1);
 
-Tp void StandardPrint(vector<T> &data, bool space_allow = 1);
+Tp void StandardPrint(vector<T> data, bool space_allow);
+
+void test();

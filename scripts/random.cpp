@@ -102,7 +102,7 @@ Tp vector<T> GetNumber::GetNumberList(int len, int l, int r, double per) // per 
 {
     if (len == -1)
         len = GetNumber::len;
-    vector<int> ans(len);
+    vector<T> ans(len);
     if (l == -1)
     {
         l = rangelow;
@@ -113,13 +113,17 @@ Tp vector<T> GetNumber::GetNumberList(int len, int l, int r, double per) // per 
     }
     for (int i = 0; i < len; i++)
     {
-        ans[i] = GetSingleNumber(l, r, per);
+        // ans[i] = GetSingleNumber(l, r, per);
+        // fix bugs
+        ans[i] = 1;
     }
+    
 
     // if (!check(ans))
     //     return GetNumberList(len, l, r);
 
     // not check variance now
+    //  return ans;
     return ans;
 }
 Tp bool GetNumber::check(vector<T> &ans)
@@ -172,19 +176,21 @@ Tp vector<T> GetNumber::GetUniqueNumberList(int len, int l, int r)
     {
         r = rangehigh;
     }
-    auto ty = typeid(int).name(); 
     vector<int> temp;
     map<int, int> mp;
     mp.clear();
-    for (int i = 0; i < len; ++i)
-    {
-        int t = GetSingleNumber<ty>(l, r) + rand();
-        while (mp[t] != 0 || t < l || t > r)
+    if (is_same<T, long long>::value)
+    { // is_same<T, int>::value ||
+        for (int i = 0; i < len; ++i)
         {
-            t = GetSingleNumber<ty>(l, r) + rand();
+            int t = GetSingleNumber(l, r) + rand();
+            while (mp[t] != 0 || t < l || t > r)
+            {
+                t = GetSingleNumber(l, r) + rand();
+            }
+            mp[t]++;
+            temp.push_back(t);
         }
-        mp[t]++;
-        temp.push_back(t);
     }
     random_shuffle(temp.begin(), temp.end());
     vector<int> ans(len);
@@ -255,7 +261,7 @@ Tp void LCStandardPrint(vector<T> &data, bool space_allow)
 
 Tp void StandardPrint(vector<T> &data, bool space_allow)
 {
-    //标准LC Json输入
+    //标准输出
     for (int i = 0; i < data.size(); i++)
     {
         auto d = data[i];
@@ -268,9 +274,14 @@ Tp void StandardPrint(vector<T> &data, bool space_allow)
         cout << endl;
 }
 
-Tp void StandardPrint(T x, bool space_allow )
+void test()
 {
-    cout << x;
-    if (space_allow)
-        cout << endl;
+    cout << 1 << endl;
 }
+
+// Tp void StandardPrint(T x, bool space_allow)
+// {
+//     cout << x;
+//     if (space_allow)
+//         cout << endl;
+// }
