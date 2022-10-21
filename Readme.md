@@ -22,7 +22,7 @@ System_Control sc; // 系统控制，用于IO操作
 ### GetString 字符生成类
 
 ```cpp
-string GetBalanceString(int len,int t)
+string Get_Balance_String(int len,int t)
 
 获取一个较为平衡的字符串
 len = 长度，t  = 方差，默认参数为30，正常情况下不需要调整;
@@ -50,11 +50,16 @@ int len; 生成数据的长度
 ### 方法
 
 ```cpp
-GetNumberList(int len = -1, int l = -1, int r = -1)
 
-生成一个vector数组 参数为：长度，左边界，右边界，种子，默认参数为-1
+GetNumber::Get_Single_Number(int l, int r, double per)
 
-GetUniqueNumberList(int len,int l,int r,int&seed);
+生成一个单个的数字 参数为：长度，左边界，正数概率（支持int,double,float,long long）
+
+Get_Number_List(int len = -1, int l = -1, int r = -1)
+
+生成一个vector数组 参数为：长度，左边界，右边界
+
+Get_Unique_Number_List(int len,int l,int r,int&seed);
 
 生成一个不重复的数组，参数为：长度，左边界，右边界，种子，默认参数为-1
 
